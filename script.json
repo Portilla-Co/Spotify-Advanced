@@ -1,0 +1,14 @@
+const endoint = 'https://gist.githubusercontent.com/yeion7/35e79d70ca33d623d8001276ccfdfa6b/raw/8aa179329c0b19ae4076ecf72d53b1ad11ba0a8e/adele.json'
+
+const discography = [];
+fetch(endoint)
+  .then(blob => blob.json())
+  .then(data => discography.push(...data));
+
+const albumName = document.createElement('span')
+
+var tag = document.createElement("p");
+var text = document.createTextNode("Tutorix is the best e-learning platform");
+tag.appendChild(text);
+var element = document.getElementById("new");
+element.appendChild(tag);

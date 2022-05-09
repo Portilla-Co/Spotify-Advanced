@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    background-color: black;
+
     color: white;
     margin: 0;
     padding: 0;
@@ -93,7 +93,7 @@
     display: grid;
     max-height: 100vh;
     grid-template-columns: 241px 1fr;
-    grid-auto-rows: 64px 40px 136px 1fr 90px;
+    grid-auto-rows: 64px 40px 200px 1fr 90px;
     grid-template-areas: 
                         "navigation header"
                         "navigation artistName"
@@ -117,7 +117,9 @@
     background-color: #121212;
     overflow-y: hidden;
     display: flex;
-    padding: 16px;
+    align-items: center;
+
+    padding: 0px 32px;
     
 }
 .artistName{
@@ -126,7 +128,7 @@
     height: 100%;
     background-color: #121212;
     overflow-y: hidden;
-    padding: 0px 16px;
+    padding: 0px 32px;
     display: flex;
     align-items: center;
 }
@@ -136,6 +138,9 @@
     height: 100%;
     background-color: #121212;
     overflow-y: hidden;
+    padding: 40px 16px 32px 32px;
+    display: flex;
+
 }
 .discography{
     grid-area: discography;
