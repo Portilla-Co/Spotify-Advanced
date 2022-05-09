@@ -106,6 +106,7 @@
 .navigation{
     grid-area: navigation;
     width: 100%;
+    height: calc(100vh - 90px);
     background-color: black;
     overflow-y: hidden;
 }

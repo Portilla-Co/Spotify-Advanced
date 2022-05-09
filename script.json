@@ -1,0 +1,7 @@
+const adeleInfo = fetch('https://gist.github.com/yeion7/35e79d70ca33d623d8001276ccfdfa6b')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+
+const discography = document.querySelector('.discography');
+
