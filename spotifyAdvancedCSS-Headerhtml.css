@@ -1,0 +1,23 @@
+.header > button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;  
+    fill: rgb(255, 255, 255);
+    background-color: rgba(0,0,0,.7);
+}
+
+.artistName > a {
+    text-decoration: none;
+    background-color: inherit;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    line-height: 1.75rem;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    padding-top: 6px;
+}
