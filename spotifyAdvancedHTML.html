@@ -41,17 +41,51 @@
             </a>
 
         </div>
-        <div class="albums">
+        <div class="discography">
+            <div class="albums"></div>
+        </div>
+        <div class="player"></div>
+</body>
+
+
+<script>
+
+    const endpoint = 'https://gist.githubusercontent.com/yeion7/35e79d70ca33d623d8001276ccfdfa6b/raw/8aa179329c0b19ae4076ecf72d53b1ad11ba0a8e/adele.json'
+
+    const discography = []
+
+    fetch(endpoint)
+        .then(blob => blob.json())
+        .then(data => discography.push(...data));
+
+    // const nameDivSelectors = document.querySelectorAll(`.albums div:nth-child(even) div:nth-child(1)`);
+
+    // nameDivSelectors.forEach((nameDiv, index) => {
+    //     nameDiv.innerHTML = `${discography[index].name}`;
+    // })
+
+    // console.log(discography);
+
+
+    const albumsContainer = document.querySelector(`.discography`);
+
+    function createAlbumNameDiv(discographyInfo) {
+        
+        discographyInfo.reverse().forEach((album, index) => {
+
+            albumsContainer.insertAdjacentHTML('afterbegin', `
+           <div class = "albumInfoContainer">
             <div class="albumPic">
-                <img src="./images/30.jpg">
+                <img src="./images/${album.name}.jpg">
             </div>
             <div class="albumInfoContainer">
-                <div class='albumName'>30</div>
+                <div class='albumName'>${album.name}</div>
                 <div class="albumInfo"">
                 <span>Álbum</span>
-                <span>• 2021 •</span>
-                <span>12 canciones</span>
+                <span>• ${album.year} •</span>
+                <span>${album.numberOfSongs} canciones</span>   
             </div>
+            <div>
             <div class=" buttons">
                     <button type="submit">
                         <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 jgfuCe">
@@ -77,30 +111,30 @@
                 </div>
 
             </div>
-        </div>
-
-        <div class="discography">
             <div class="songsInfoHeader">
-                <div>#</div>
-                <div>TÍTULO</div>
-                <div>
-                    <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 jgfuCe">
-                        <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path>
-                        <path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path>
-                    </svg>
+                    <div>#</div>
+                    <div>TÍTULO</div>
+                    <div>
+                        <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 jgfuCe">
+                            <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path>
+                            <path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z">
+                            </path>
+                        </svg>
+                    </div>
                 </div>
-            </div>
-            <div class="songsContainer">
-                <div class="songNumber">1</div>
-                <div class="songName">
-                    <span>Strangers By Nature</span>
-                    <span>Adele</span>
-                </div> 
-                <div class="songDuration">3:02</div>
-            </div>
+                <div class="songsContainer">
+                    <div class="songNumber">1</div>
+                    <div class="songName">
+                        <span>${album.songs[index].name}</span>
+                        <span>Adele</span>
+                    </div>
+                    <div class="songDuration">3:02</div>
+                </div>
+            `)
 
-        </div>
-        <div class="player"></div>
-</body>
+        })
+    }
 
-<script src="scripts.js"></script>
+
+
+</script>
