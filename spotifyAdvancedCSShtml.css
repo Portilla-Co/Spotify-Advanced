@@ -149,13 +149,6 @@
     padding: 40px 16px 32px 32px;  
 
 }
-.discography{
-    grid-area: discography;
-    max-width: 100%;
-    max-height: 100%;
-    background-color: #121212;
-    overflow-y: scroll;
-}
 
 .player{
     grid-area: player;
