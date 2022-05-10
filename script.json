@@ -1,0 +1,20 @@
+  const endpoint = 'https://gist.githubusercontent.com/yeion7/35e79d70ca33d623d8001276ccfdfa6b/raw/8aa179329c0b19ae4076ecf72d53b1ad11ba0a8e/adele.json'
+
+  const discography = []
+
+  fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => discography.push(...data));
+
+
+      const nameOfAlbum = discography.map((album, index) => {
+
+        const name = document.createElement('span');
+
+        name.appendChild(document.createTextNode(`${album.name}`));
+
+        document.querySelector(`.albums div:nth-child(${index + 2}) div:nth-child(1)`).appendChild(name);
+      });
+
+      
+  

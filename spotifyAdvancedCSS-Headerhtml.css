@@ -1,17 +1,20 @@
 .header > button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: black;
     width: 32px;
     height: 32px;
-    border-radius: 50px;  
-    fill: rgb(255, 255, 255);
-    background-color: rgba(0,0,0,.7);
+    border: none;
+    border-radius: 50%;
+    fill: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    
 }
 
 .artistName > a {
     text-decoration: none;
-    background-color: inherit;
     height: 30px;
     display: flex;
     align-items: center;
