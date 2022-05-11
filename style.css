@@ -1,0 +1,348 @@
+
+    * {
+        box-sizing: border-box;
+        color: white;
+        margin: 0;
+        padding: 0;
+        font-family: spotifyinternal-artistnpv-spotify-circular-latin;
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-latin;
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Book-ffeb1e7f75131ff615f338c73751b633.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Book-ac71b98add4c5863080462c2e3252022.woff) format("woff")
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-latin;
+        font-style: normal;
+        font-weight: 700;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Bold-39f75fe74e898cc9ebef1a4e8a6023b5.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Bold-8615f49cf86e86a16ebb9c5565e99743.woff) format("woff")
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-latin;
+        font-style: normal;
+        font-weight: 900;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Black-765ca9bf8d2f11afb11dc49884b779ca.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Latin-Black-d11d90541e5f15158097018d3634a9e0.woff) format("woff")
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-cyrillic;
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Book-a2d035801f91171a95e1da4355607f88.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Book-4458a2f11a26f9778b5c1a1719bf688f.woff) format("woff");
+        unicode-range: U+04??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-cyrillic;
+        font-style: normal;
+        font-weight: 700;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Bold-56e0fc88fd266fe9d5e323df8e190a97.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Bold-d3b578139d28c5ab8cef8811a8ec521c.woff) format("woff");
+        unicode-range: U+04??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-cyrillic;
+        font-style: normal;
+        font-weight: 900;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Black-05ec87a84eecb2c7e3df0deedd7e0163.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Cyrillic-Black-84bb9e740e12139b1a7b1acaa294aa5e.woff) format("woff");
+        unicode-range: U+04??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-arabic;
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Book-590e30595e03caba45b26307fd28be68.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Book-d370787b82e945776b4067b43b72e05d.woff) format("woff");
+        unicode-range: U+06??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-arabic;
+        font-style: normal;
+        font-weight: 700;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Bold-aa4c5c76dea408a4e7a673ae5188e8b5.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Bold-45f58735fe46b3f972c5b787e0ca4745.woff) format("woff");
+        unicode-range: U+06??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-arabic;
+        font-style: normal;
+        font-weight: 900;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Black-16fd768ee89c1a145b9eaadb228ece5a.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Arabic-Black-a9126697756e0b9bf8d984da997d304c.woff) format("woff");
+        unicode-range: U+06??
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-hebrew;
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Book-fdbfe6ba6f193d7002641edd5ba8d1bb.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Book-bc62f5e29c81fe798fd550ce66ec614b.woff) format("woff");
+        unicode-range: U+0590-05ff
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-hebrew;
+        font-style: normal;
+        font-weight: 700;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Bold-66ffc49634f84667dfeeba901fce6e14.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Bold-0fbb731e50d7a124246e82baf269b51f.woff) format("woff");
+        unicode-range: U+0590-05ff
+    }
+
+    @font-face {
+        font-family: spotifyinternal-artistnpv-spotify-circular-hebrew;
+        font-style: normal;
+        font-weight: 900;
+        src: url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Black-bdc35ee2a02aedc06c6183d9bba64d0d.woff2) format("woff2"), url(https://encore.scdn.co/fonts/CircularSpotify-UI-Hebrew-Black-b79393fd9daf143d284c162732983f79.woff) format("woff");
+        unicode-range: U+0590-05ff
+    }
+    .mainContainer{
+        display: grid;
+        grid-template-columns: 241px 1fr;
+        grid-template-rows: 64px 40px 1fr 90px;
+        grid-template-areas: 
+            'fakeNav header'
+            'fakeNav artistName'
+            'fakeNav songsContainer'
+            'player player'
+        ;
+        height: 100vh;
+        
+    }
+    
+    .discography {
+        display: flex;
+        background-color: #121212;
+        flex-direction: column;
+        grid-area: songsContainer;
+        overflow-y: scroll;
+        padding: 40px 32px 0px 32px;
+    }
+    .discography::-webkit-scrollbar {
+        width: 16px;
+    }
+    .discography::-webkit-scrollbar-thumb {
+        background-color: rgba(255,255,255,.3);
+    }
+    
+
+    .albumsContainer {
+        display: flex;
+        margin-bottom: 32px;
+    }
+
+    .albumPics {
+        width: 136px;
+        height: 136px;
+    }
+
+    .albumPics>img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .albumName {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -1.28px;
+        display: flex;
+        align-items: center;
+    }
+
+    .albumName {
+        height: 36px;
+        padding-top: 4px;
+
+    }
+
+    .albumRealaseDate {
+        margin-top: 8px;
+    }
+
+    .albumRealaseDate>span {
+        font-size: 14px;
+        color: #b3b3b3;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 16px;
+    }
+
+    .albumInfo {
+        margin-left: 24px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 44px;
+    }
+
+    .buttons button:nth-child(1) {
+        background-color: white;
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50px;
+        fill: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttons button:nth-child(2) {
+        background-color: transparent;
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50px;
+        fill: rgba(255, 255, 255, .7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttons button:nth-child(3) {
+        background-color: transparent;
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50px;
+        margin-left: -4px;
+        fill: rgba(255, 255, 255, .7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .listHeader {
+        display: grid;
+        grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr);
+        grid-template-rows: 36px;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        color: #b3b3b3;
+        height: 100%;
+        grid-gap: 16px;
+        padding: 0 16px;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .listHeader span:nth-child(1) {
+        font-size: 16px;
+        color: rgb(179, 179, 179);
+        line-height: 25.6px;
+        margin-left: 5px;
+        margin-top: 4px;
+        vertical-align: baseline;
+    }
+
+    .listHeader>span:nth-child(2) {
+        font-size: 12px;
+        color: rgb(179, 179, 179);
+        line-height: 16px;
+        vertical-align: baseline;
+        letter-spacing: 1.2px;
+        margin-top: 2px;
+        margin-left: 1px;
+    }
+
+    .listHeader>span:nth-child(3) {
+        fill: #b3b3b3;
+        padding-left: 272px;
+        padding-top: 4px;
+    }
+
+    .songsListContainer {
+        display: grid;
+        grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr);
+        grid-template-rows: 56px;
+        color: #b3b3b3;
+        height: 100%;
+        grid-gap: 16px;
+        padding: 0 16px;
+        align-items: center;
+        margin-top: 1px;
+        margin-left: 2px;
+        
+    }
+    .songsListContainer > span:nth-child(1) {
+        font-size: 16px;
+        color: #A7A7A7;
+        margin-left: px;
+        margin-top: -3px;
+        
+    }
+
+    .fakeNav{
+        background-color: #121212;
+        grid-area: fakeNav;
+        height: 100%;
+    }
+    .songName{
+       display: flex; 
+       flex-direction: column;
+
+    }
+    .songName span:nth-child(2){
+        color:#b3b3b3;
+        font-size: 14px;
+        padding-top: 4px;
+        
+    }
+    .duration{
+        padding-left: 252px;
+        padding-top: 11px;
+        margin-bottom: 18px;
+        letter-spacing: 0.6px;
+        line-height: 16px;
+        vertical-align: baseline;
+        font-variant-numeric: tabular-nums;
+
+    }
+    .duration > span{
+        color: #A7A7A7;
+        font-size: 14px;
+        line-height: 16px
+
+    }
+    .header{
+        grid-area: header;
+        height: 100%;
+        background-color: #121212;
+        padding: 16px 32px;
+        gap: 16px;
+    }
+    .header > button {
+        background-color: black;
+        fill: #b3b3b3;
+        border-radius: 50px;
+        border-color: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+
+    }
+    .header button svg{
+       max-width: 100%;
+         max-height: 100%;
+    }
+
+    .artistName{
+        color: white;
+        font-size: 24px;
+        grid-area: artistName;
+        height: 100%;
+        align-items: center;
+        font-weight: 700;
+        background-color: #121212;
+        padding: 9px 32px 12px 32px;
+        text-decoration: none;
+        letter-spacing: -0.96px;
+        line-height: 28px;
+    }
+    .separator{
+        margin-top: 64px;
+    }
