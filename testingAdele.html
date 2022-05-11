@@ -237,7 +237,9 @@
 </style>
 
 <body>
-    <div class="discography"></div>
+    <div class="discography">
+
+    </div>
 
 </body>
 <script>
@@ -261,7 +263,7 @@
 
     const albumsContainer = document.querySelector(`.discography`);
 
-    function createAlbumNameDiv(discographyInfo) {
+function createAlbumNameDiv(discographyInfo) {
 
         discographyInfo.reverse().map((album, index) => {
 
@@ -336,13 +338,14 @@
             albums.push(album)
         })
 
-        albumList.reverse().map((album, index) => {
-            for (let i = (album.length -1); i >= 0; i--) {
-                albums[index].insertAdjacentHTML('afterend',`
-                <span>${[i+1]}</span>
-                <span>${albumList[index][i].name}</span>
-                <span>${albumList[index][i].duration}</span>
-
+        albumList.map((album, index) => {
+            for (let i = (album.length - 1); i >= 0; i--) {
+                albums[index].insertAdjacentHTML('afterend', `
+                <div>
+                    <span>${[i + 1]}</span>
+                    <span>${albumList[index][i].name}</span>
+                    <span>${albumList[index][i].duration}</span>
+                </div>
                 `)
             }
         })
