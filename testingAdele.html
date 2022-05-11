@@ -223,6 +223,17 @@
     .listHeader>span:nth-child(3) {
         fill: #b3b3b3;
     }
+
+    .songsListContainer {
+        display: grid;
+        grid-template-columns: [index] 16px [first] 4fr [last] minmax(120px, 1fr);
+        grid-template-rows: 56px;
+        color: #b3b3b3;
+        height: 100%;
+        grid-gap: 16px;
+        padding: 0 16px;
+        align-items: center;
+    }
 </style>
 
 <body>
@@ -231,7 +242,7 @@
 </body>
 <script>
 
-    const endpoint = "https://gist.githubusercontent.com/flportilla/0b4acce06e2aed6ad39de765fe06ab2c/raw/68176fd5732895fdc6cba90e45852a31fead1ee1/Adele.json"
+    const endpoint = "https://gist.githubusercontent.com/flportilla/0b4acce06e2aed6ad39de765fe06ab2c/raw/c8ffc86dd67620704606770b4ec83ad6c76feab5/Adele.json"
 
     const discography = []
 
@@ -249,11 +260,10 @@
 
 
     const albumsContainer = document.querySelector(`.discography`);
-    const listoContainer = document.querySelector('.listHeader')
 
     function createAlbumNameDiv(discographyInfo) {
 
-        discographyInfo.reverse().forEach((album, index) => {
+        discographyInfo.reverse().map((album, index) => {
 
             albumsContainer.insertAdjacentHTML('afterbegin', `
     <div class="albumsContainer">
@@ -303,23 +313,42 @@
                     <path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path>
                 </svg>
             </span>
-        </div>
+    </div>
                 
                 `)
         })
     }
 
-function createSongsListDiv(discographyInfo) {
-     
-        const albumList = []
-        discographyInfo.forEach((album) => {
-           
+
+
+    function createSongsListDiv(discographyInfo) {
+
+        let albumList = [] //array with only the songs [[{}], [{}], [{}], [{}]]
+        let listContainer = document.querySelectorAll('.listHeader') //selector from where I need to create the list of songs (below this)
+        const albums = []  //elements on an array
+
+        discographyInfo.reverse().map((album) => {
             albumList.push(album.songs)
-           
-    })
-    return albumList
-}           
 
+        })
 
+        listContainer.forEach((album, index) => {
+            albums.push(album)
+        })
+
+        albumList.reverse().map((album, index) => {
+            for (let i = (album.length -1); i >= 0; i--) {
+                albums[index].insertAdjacentHTML('afterend',`
+                <span>${[i+1]}</span>
+                <span>${albumList[index][i].name}</span>
+                <span>${albumList[index][i].duration}</span>
+
+                `)
+            }
+        })
+        // console.log(albumList)
+        // console.log(listContainer)
+        // console.log(albums)
+    }
 
 </script>
