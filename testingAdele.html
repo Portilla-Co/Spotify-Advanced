@@ -140,12 +140,7 @@
 
             })
         }
-        window.addEventListener('load', () => {
-            createAlbumNameDiv()
-            createSongsListDiv()
-            addSeparators()
-        })
-
+       
         function addSeparators() {
             const albumContainers = []
             const albumsInfoContainer = document.querySelectorAll('.albumsContainer')
@@ -158,7 +153,12 @@
 
             }
         }
-
+        
+        window.addEventListener('load', () => {
+            createAlbumNameDiv()
+            createSongsListDiv()
+            addSeparators()
+        })
     </script>
 
 </body>
