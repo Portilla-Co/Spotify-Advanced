@@ -16,9 +16,11 @@
 
 
 <body>
+    <audio class="song" src="./song.mp3"></audio>
     <div class="mainContainer">
         <div class="header">
-            <button><svg role="img" height="24" width="24" class="Svg-sc-1bi12j5-0 jgfuCe IYDlXmBmmUKHveMzIPCF"
+            <button>
+                <svg role="img" height="24" width="24" class="Svg-sc-1bi12j5-0 jgfuCe IYDlXmBmmUKHveMzIPCF"
                     viewBox="0 0 24 24">
                     <path
                         d="M15.957 2.793a1 1 0 010 1.414L8.164 12l7.793 7.793a1 1 0 11-1.414 1.414L5.336 12l9.207-9.207a1 1 0 011.414 0z">
@@ -44,17 +46,43 @@
 
         <div class="fakeNav">
             <div style="height: 100%; width: 100%;">
-                <img s style="height: 100%; width: 100%;" src="./images/falsenav.png">
+                <img style="min-height: 100%;" src="./images/falsenav.png">
+            </div>
+        </div>
+        <div class="player">
+            <div class="playerButtons">
+                <button class="play">
+                    <svg role="img" height="16" width="16" viewBox="0 0 16 16">
+                        <path
+                            d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z">
+                        </path>
+                    </svg>
+
+                    <svg role="img" height="16" width="16" viewBox="0 0 16 16" style="display: none;">
+                        <path
+                            d="M2.7 1a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7H2.7zm8 0a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7h-2.6z">
+                        </path>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
     <script>
-        const albumsContainer = document.querySelector(`.discography`);
+
+        //create global variables
+        let albumPlayButton;
+        let playerPlayButton;
+        let song;
+        let albumsContainer = document.querySelector(`.discography`);
+        let playerButton = document.querySelector(`.playerButtons`);
+
+        //create a template for the album
         function createAlbumNameDiv() {
 
             discography.reverse().map((album, index) => {
 
-                albumsContainer.insertAdjacentHTML('afterbegin', `
+                albumsContainer.insertAdjacentHTML('afterbegin', ` 
+                <div class="backgrounds">
                     <div class="albumsContainer">
                         <div class="albumPics">
                             <img src="./images/${album.name}.jpg">
@@ -103,10 +131,12 @@
                                 </svg>
                             </span>
                         </div>
+                    </div>
     `)
             })
         }
 
+        //create a template for the songs
         function createSongsListDiv() {
 
             let albumList = [] //array with only the songs [[{}], [{}], [{}], [{}]]
@@ -132,33 +162,73 @@
                         <div class ="duration">
                             <span>${albumList[index][i].duration}</span>
                         </div>
-                    </div>
-
-                    
+                    </div>                    
                     `)
                 }
 
             })
         }
-       
+
+        //add spaces between albums
         function addSeparators() {
             const albumContainers = []
             const albumsInfoContainer = document.querySelectorAll('.albumsContainer')
             albumsInfoContainer.forEach((albumContainer, index) => {
                 albumContainers.push(albumContainer)
             })
-            console.log(albumContainers)
             for (let index = 1; index < albumContainers.length; index++) {
                 albumContainers[index].insertAdjacentHTML('beforeBegin', '<div class="separator"></div>')
 
             }
         }
-        
+
+        //create sekectors
+        function selectPlayButtons() {
+            albumPlayButton = document.querySelectorAll('.buttons > button:first-child')
+            playerPlayButton = document.querySelector('.play')
+            playerPlayIcon = document.querySelector('.play > svg:first-child')
+            playerPauseIcon = document.querySelector('.play > svg:last-child')
+            song = document.querySelector('.song')
+        }
+        //play the song
+        function play() {
+            if (song.paused) {
+                song.play()
+                playerPlayIcon.style.display = 'none'
+                playerPauseIcon.style.display = ''
+
+            }
+            else {
+                song.pause()
+                playerPlayIcon.style.display = ''
+                playerPauseIcon.style.display = 'none'
+
+            }
+        }
+        //pause the song
+        function pause() {
+            song.pause()
+
+        }
+
+        //create event listeners
+        function addListeners() {
+            albumPlayButton.forEach(button => {
+                button.addEventListener('click', play)
+            })
+            playerPlayIcon.addEventListener('click', play)
+            playerPauseIcon.addEventListener('click', play)
+            playerPlayButton.addEventListener('click', play)
+
+        }
         window.addEventListener('load', () => {
             createAlbumNameDiv()
             createSongsListDiv()
             addSeparators()
+            selectPlayButtons()
+            addListeners()
         })
+
     </script>
 
 </body>
