@@ -381,7 +381,11 @@
     border-top: #181818 solid 1px;
 
 }
-
+.playerButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .player .playerButtons>button {
     border-radius: 50px;
     height: 32px;
@@ -392,4 +396,17 @@
 }
 .play:active{
     transform: scale(1.05);
+}
+
+.progresBarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+.progressBar{
+    min-width: 620px;
+    height: 4px;
+    background-color: hsla(0,0%,100%,0.3);
 }

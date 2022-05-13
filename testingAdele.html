@@ -64,6 +64,17 @@
                         </path>
                     </svg>
                 </button>
+                <div class="progresBarContainer">
+                    <div>
+                        asd
+                    </div>
+                    <div>
+                        <div class="progressBar"></div>
+                    </div>
+                    <div>
+                        asd
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -196,6 +207,7 @@
                 song.play()
                 playerPlayIcon.style.display = 'none'
                 playerPauseIcon.style.display = ''
+                console.log('playing')
 
             }
             else {
@@ -208,7 +220,6 @@
         //pause the song
         function pause() {
             song.pause()
-
         }
 
         //create event listeners
@@ -216,8 +227,6 @@
             albumPlayButton.forEach(button => {
                 button.addEventListener('click', play)
             })
-            playerPlayIcon.addEventListener('click', play)
-            playerPauseIcon.addEventListener('click', play)
             playerPlayButton.addEventListener('click', play)
 
         }
