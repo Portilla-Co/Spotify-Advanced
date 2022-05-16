@@ -182,6 +182,7 @@
 
 .albumInfo {
     margin-left: 24px;
+    color: white;
 }
 
 .buttons {
@@ -402,7 +403,7 @@
     flex-direction: column;
     align-items: center;
 }
-.player .playerButtons>button {
+.player .playerButtons > button {
     border-radius: 50px;
     height: 32px;
     width: 32px;
@@ -410,6 +411,10 @@
     justify-content: center;
 
 }
+.playIcon{
+    fill: white;
+}
+
 .play:active{
     transform: scale(1.05);
 }

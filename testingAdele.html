@@ -33,7 +33,6 @@
             </a>
         </div>
         <div class="discography">
-            <div class="backgrounds"></div>
         </div>
 
         <div class="fakeNav">
@@ -72,20 +71,15 @@
     </div>
     <script>
 
-        //create global variables
-
         let albumsContainer = document.querySelector(`.discography`);
-        const playButton = `<svg role="img" height="24" width="24" class="Svg-sc-1bi12j5-0 jgfuCe UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>`
         const song = document.querySelector(`.song`);
 
-
-        //create a template for the album
         function createAlbumNameDiv(discography) {
 
             const F = discography.map((album, index) => {
 
                 return ` 
-                
+                <div class="backgrounds">
                     ${index != 0 ? '<div class="separator"></div>' : ''}
                     <div class="albumsContainer">
                         <div class="albumPics">
@@ -101,7 +95,7 @@
                                 <span>${album.numberOfSongs} canciones</span>
                             </div>
                             <div class="buttons">
-                                <button type="submit">
+                                <button id ="${album.name}">
                                     <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-sc-1bi12j5-0 jgfuCe">
                                         <path
                                             d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z">
@@ -135,22 +129,27 @@
                                 </svg>
                             </span>
                         </div>
-                        ${createSongsListDiv(album.songs)}
+                        ${createSongsListDiv(album, album.songs)}
+                    </div>
     `
             })
             return F.join(``);
         }
 
-        //create a template for the songs
-        function createSongsListDiv(songs) {
+        function createSongsListDiv(album, songs) {
 
 
             return songs.map((song, index) => {
-                
+
                 return `
-                    <div class="songsListContainer ${[index + 1] == 1 ? 'firstContainer' : ''}" id="${song.name}">
+                    <div class="songsListContainer ${[index + 1] == 1 ? 'firstContainer' : ''}" id="${index == 0 ? album.name : ''}">
                         <span class="songNumber">${[index + 1]}</span>
-                        <span class='playIcon'>></span>
+                        <span class='playIcon'>
+                            <svg role="img" height="16" width="16" viewBox="0 0 24 24">
+                                <path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z">
+                                </path>
+                            </svg>
+                        </span>
                         <div class="songName" >
                             <span>${song.name}</span>
                             <span>Adele</span>
@@ -160,11 +159,9 @@
                         </div>
                     </div>                    
                     `
-            }).join('')
-        
-        }
+            }).join('')}
+            
 
-        //play the song
         function playOrPause() {
             if (song.paused) {
                 song.play()
@@ -176,6 +173,28 @@
             }
         }
 
+        function playFirstSong() {
+
+            const albumId = this.id
+            const container = document.querySelectorAll(`.firstContainer`)
+            let firstSongSelector; 
+
+            for (let i = 0; i < container.length; i++) {
+                if(container[i].id == albumId){
+                    firstSongSelector = container[i]
+                }
+            }
+            if (song.paused) {
+                song.play()
+                firstSongSelector.classList.add('playing')
+            }
+            else {
+                song.pause()
+                firstSongSelector.classList.remove('playing')
+            }    
+        }
+
+
         window.addEventListener('load', async () => {
 
             const endpoint = "https://gist.githubusercontent.com/flportilla/0b4acce06e2aed6ad39de765fe06ab2c/raw/c8ffc86dd67620704606770b4ec83ad6c76feab5/Adele.json"
@@ -185,20 +204,21 @@
                     .then(blob => blob.json());
 
             albumsContainer.innerHTML = createAlbumNameDiv(discography);
-            const songsContainer = document.querySelectorAll('.songsListContainer ')
-            
-            songsContainer.forEach(song =>{
+            const songsContainer = document.querySelectorAll('.songsListContainer')
+            const albumPlayButton = document.querySelectorAll('.buttons > button:first-child')
+
+            songsContainer.forEach(song => {
                 song.addEventListener('click', playOrPause)
             })
 
+            albumPlayButton.forEach(button => {
+                button.addEventListener('click', playFirstSong)
+            })
         })
 
     </script>
 
 </body>
 <!-- 
-//click on play, play first song
-//click on song = play song (any song)
-//on play = change class to green
 //player = shows status of song (time left)
 //player buttons must work -->
