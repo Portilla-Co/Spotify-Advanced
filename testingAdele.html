@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 
 <head>
-    <script>
-        const endpoint = "https://gist.githubusercontent.com/flportilla/0b4acce06e2aed6ad39de765fe06ab2c/raw/c8ffc86dd67620704606770b4ec83ad6c76feab5/Adele.json"
-
-        const discography = []
-
-        fetch(endpoint)
-            .then(blob => blob.json())
-            .then(data => discography.push(...data));
-
-    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -88,12 +78,13 @@
         let playerButton = document.querySelector(`.playerButtons`);
 
         //create a template for the album
-        function createAlbumNameDiv() {
+        function createAlbumNameDiv(discography) {
 
-            discography.reverse().map((album, index) => {
+            const F = discography.map((album, index) => {
 
-                albumsContainer.insertAdjacentHTML('afterbegin', ` 
+                return ` 
                 <div class="backgrounds">
+                    ${index != 0 ? '<div class="separator"></div>' : ''}
                     <div class="albumsContainer">
                         <div class="albumPics">
                             <img src="./images/${album.name}.jpg">
@@ -142,81 +133,57 @@
                                 </svg>
                             </span>
                         </div>
+                        ${createSongsListDiv(album.songs)}
                     </div>
-    `)
+    `
             })
+            return F.join(``);
         }
 
         //create a template for the songs
-        function createSongsListDiv() {
+        function createSongsListDiv(songs) {
 
-            let albumList = [] //array with only the songs [[{}], [{}], [{}], [{}]]
-            let listContainer = document.querySelectorAll('.listHeader') //selector from where I need to create the list of songs (below this)
-            const albums = []  //elements on an array
-            discography.reverse().map((album) => {
-                albumList.push(album.songs)
+            return songs.map((song, index) => {
 
-            })
-            listContainer.forEach((album, index) => {
-                albums.push(album)
-            })
-            albumList.map((album, index) => {
-                for (let i = (album.length - 1); i >= 0; i--) {
-
-                    albums[index].insertAdjacentHTML('afterend', `
+                return `
                     <div class="songsListContainer">
-                        <span>${[i + 1]}</span>
+                        <span>${[index + 1]}</span>
                         <div class="songName">
-                            <span>${albumList[index][i].name}</span>
+                            <span>${song.name}</span>
                             <span>Adele</span>
                         </div>
                         <div class ="duration">
-                            <span>${albumList[index][i].duration}</span>
+                            <span>${song.duration}</span>
                         </div>
                     </div>                    
-                    `)
-                }
-
-            })
+                    `
+            }).join('')
         }
 
-        //add spaces between albums
-        function addSeparators() {
-            const albumContainers = []
-            const albumsInfoContainer = document.querySelectorAll('.albumsContainer')
-            albumsInfoContainer.forEach((albumContainer, index) => {
-                albumContainers.push(albumContainer)
-            })
-            for (let index = 1; index < albumContainers.length; index++) {
-                albumContainers[index].insertAdjacentHTML('beforeBegin', '<div class="separator"></div>')
-
-            }
-        }
-
-        //create sekectors
+        //create selectors
         function selectPlayButtons() {
-            albumPlayButton = document.querySelectorAll('.buttons > button:first-child')
+            albumPlayButtons = document.querySelectorAll('.buttons > button:first-child')
             playerPlayButton = document.querySelector('.play')
             playerPlayIcon = document.querySelector('.play > svg:first-child')
             playerPauseIcon = document.querySelector('.play > svg:last-child')
             song = document.querySelector('.song')
         }
+
         //play the song
         function play() {
             if (song.paused) {
                 song.play()
                 playerPlayIcon.style.display = 'none'
                 playerPauseIcon.style.display = ''
-                console.log('playing')
 
             }
             else {
                 song.pause()
                 playerPlayIcon.style.display = ''
                 playerPauseIcon.style.display = 'none'
-
             }
         }
+
         //pause the song
         function pause() {
             song.pause()
@@ -224,20 +191,35 @@
 
         //create event listeners
         function addListeners() {
-            albumPlayButton.forEach(button => {
+            albumPlayButtons.forEach(button => {
                 button.addEventListener('click', play)
             })
             playerPlayButton.addEventListener('click', play)
 
         }
-        window.addEventListener('load', () => {
-            createAlbumNameDiv()
-            createSongsListDiv()
-            addSeparators()
-            selectPlayButtons()
+        
+        window.addEventListener('load', async () => {
+            
+            const endpoint = "https://gist.githubusercontent.com/flportilla/0b4acce06e2aed6ad39de765fe06ab2c/raw/c8ffc86dd67620704606770b4ec83ad6c76feab5/Adele.json"
+
+            const discography = 
+                await fetch(endpoint)
+                .then(blob => blob.json());
+
+            albumsContainer.innerHTML = createAlbumNameDiv(discography);
+
+            selectPlayButtons();
+
             addListeners()
         })
 
+
+        //click on play, play first song
+        //click on song = play song (any song)
+        //on play = change class to green
+        //player = shows status of song (time left)
+        //player buttons must work
+        
     </script>
 
 </body>
