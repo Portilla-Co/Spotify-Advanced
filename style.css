@@ -283,12 +283,13 @@
     margin-left: 2px;
 
 }
-.songsListContainer:hover{
-    background-color: rgba(255,255,255,.1);
+
+.songsListContainer:hover {
+    background-color: rgba(255, 255, 255, .1);
     color: white
 }
 
-.songsListContainer:hover .songName span:nth-child(2){
+.songsListContainer:hover .songName span:nth-child(2) {
     color: white
 }
 
@@ -299,13 +300,16 @@
     margin-top: -3px;
 
 }
-.songsListContainer .playIcon{
+
+.songsListContainer .playIcon {
     display: none;
 }
-.songsListContainer:hover .playIcon{
+
+.songsListContainer:hover .playIcon {
     display: block;
 }
-.songsListContainer:hover .songNumber{
+
+.songsListContainer:hover .songNumber {
     display: none;
 }
 
@@ -395,43 +399,117 @@
     padding: 16px 32px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
     border-top: #181818 solid 1px;
 
 }
-.playerButtons{
+
+.player .currentSongInfo {
+    display: flex;
+    height: 58px;
+    width: 25%;
+    font-size: 11px;
+    margin-left: -8px;
+}
+
+
+.currentSongInfo .albumsContainer .albumThumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 50px;
+    background-color: #121212;
+
+}
+.currentSongInfo .albumsContainer .albumThumb > img {
+    width: 100%;
+    height: 100%;
+}
+
+.currentSongInfo .albumsContainer{
+    display: flex;
+
+}
+.currentSongInfo .albumsContainer .artistInfo{
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+}
+.currentSongInfo .albumsContainer .artistInfo span:nth-child(1){
+    color:white;
+    font-size: 14px;
+}
+.currentSongInfo .albumsContainer .artistInfo span:nth-child(2){
+    color: #b3b3b3;
+    font-size: 11px;
+    padding-top: 2px;
+}
+
+.playerButtons {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 70%;
 }
-.player .playerButtons > button {
+
+.player .playerButtons>button {
     border-radius: 50px;
     height: 32px;
     width: 32px;
     align-items: center;
     justify-content: center;
-
 }
-.playIcon{
+
+.playIcon {
     fill: white;
 }
 
-.play:active{
+.player .playerButtons .play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play:active {
     transform: scale(1.05);
 }
 
-.progresBarContainer{
+.player .playerPlayButton {
+    display: none;
+}
+
+.player .playerPauseButton {
+    display: block;
+}
+
+.songProgress {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     margin-top: 8px;
-}
-.progressBar{
-    min-width: 620px;
-    height: 4px;
-    background-color: hsla(0,0%,100%,0.3);
+    font-size: 11px;
+    color: #6a6a6a;
 }
 
-.songsListContainer.playing .songName{
+.progressBar {
+    min-width: 620px;
+    height: 4px;
+    background-color: hsla(0, 0%, 100%, 0.3);
+}
+
+.progressBar:hover {
+    cursor: pointer;
+}
+
+.songsListContainer.playing .songName {
     color: green;
-}   
+}
+
+.progressBarFilled {
+    background-color: white;
+    flex: 0;
+    flex-basis: 53%;
+    height: 4px;
+
+}

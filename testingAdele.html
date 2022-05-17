@@ -41,38 +41,56 @@
             </div>
         </div>
         <div class="player">
+            <div class="currentSongInfo">
+                <div class="albumsContainer">
+                    <div class="albumThumb">
+                        <img src="./images/30.jpg">
+                    </div>
+                    <div class="artistInfo">
+                        <span>Stranger By Nature</span>
+                        <span>Adele</span>
+                    </div>
+                    
+                </div>
+            </div>
             <div class="playerButtons">
                 <button class="play">
-                    <svg role="img" height="16" width="16" viewBox="0 0 16 16">
+                    <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="playerPlayButton">
                         <path
                             d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z">
                         </path>
                     </svg>
-
-                    <svg role="img" height="16" width="16" viewBox="0 0 16 16" style="display: none;">
+                    <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="playerPauseButton">
                         <path
                             d="M2.7 1a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7H2.7zm8 0a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7h-2.6z">
                         </path>
                     </svg>
                 </button>
-                <div class="progresBarContainer">
-                    <div>
-                        asd
+                <div class="songProgress">
+                    <div class="currentTime">
+                        0:00
                     </div>
                     <div>
-                        <div class="progressBar"></div>
+                        <div class="progressBar">
+                            <div class="progressBarFilled"></div>
+                        </div>
                     </div>
-                    <div>
-                        asd
+                    <div class="totalTime">
+                        0:00
                     </div>
                 </div>
             </div>
+            <div style="width: 25%"></div>
         </div>
     </div>
     <script>
 
         let albumsContainer = document.querySelector(`.discography`);
         const song = document.querySelector(`.song`);
+        const progressBar = document.querySelector('.progressBar')
+        const playerPlayButton = document.querySelector('.play .playerPlayButton')
+        const playerPauseButton = document.querySelector('.play .playerPauseButton')
+
 
         function createAlbumNameDiv(discography) {
 
@@ -159,17 +177,23 @@
                         </div>
                     </div>                    
                     `
-            }).join('')}
-            
+            }).join('')
+        }
 
         function playOrPause() {
             if (song.paused) {
                 song.play()
                 this.classList.add('playing')
+                playerPauseButton.classList.remove('playerPauseButton')
+                playerPauseButton.classList.add('playerPlayButton')
+                playerPlayButton.classList.remove('playerPlayButton')
+
             }
             else {
                 song.pause()
                 this.classList.remove('playing')
+                playerPlayButton.classList.add('playerPlayButton')
+                playerPauseButton.classList.add('playerPauseButton')
             }
         }
 
@@ -177,23 +201,53 @@
 
             const albumId = this.id
             const container = document.querySelectorAll(`.firstContainer`)
-            let firstSongSelector; 
+            let firstSongSelector;
 
             for (let i = 0; i < container.length; i++) {
-                if(container[i].id == albumId){
+                if (container[i].id == albumId) {
                     firstSongSelector = container[i]
                 }
             }
             if (song.paused) {
                 song.play()
+                playerPauseButton.classList.remove('playerPauseButton')
+                playerPauseButton.classList.add('playerPlayButton')
+                playerPlayButton.classList.remove('playerPlayButton')
                 firstSongSelector.classList.add('playing')
             }
             else {
                 song.pause()
+                playerPlayButton.classList.add('playerPlayButton')
+                playerPauseButton.classList.add('playerPauseButton')
                 firstSongSelector.classList.remove('playing')
-            }    
+            }
         }
 
+        function handleProgress() {
+            const percent = (song.currentTime / song.duration) * 100
+
+            const currentTime = document.querySelector('.currentTime')
+            const totalTime = document.querySelector('.totalTime')
+            const progressBarFilled = document.querySelector('.progressBarFilled')
+
+            const currentSeconds = parseInt(song.currentTime % 60);
+            const currentMinutes = parseInt((song.currentTime / 60) % 60);
+
+            
+            const totalSeconds = parseInt(song.duration % 60);
+            const totalMinutes = parseInt((song.duration / 60) % 60);
+
+            currentTime.innerHTML = `${currentMinutes}:${currentSeconds}`
+            totalTime.innerHTML = `${totalMinutes}:${totalSeconds}`
+            progressBarFilled.style.width = `${percent}%`
+
+
+        }
+
+        function manualProgress(e){
+            const percent = (e.offsetX / progressBar.offsetWidth) * 100
+            song.currentTime = (song.duration * percent) / 100
+        }
 
         window.addEventListener('load', async () => {
 
@@ -206,6 +260,7 @@
             albumsContainer.innerHTML = createAlbumNameDiv(discography);
             const songsContainer = document.querySelectorAll('.songsListContainer')
             const albumPlayButton = document.querySelectorAll('.buttons > button:first-child')
+            const playerButtons = document.querySelectorAll('.play')
 
             songsContainer.forEach(song => {
                 song.addEventListener('click', playOrPause)
@@ -214,7 +269,17 @@
             albumPlayButton.forEach(button => {
                 button.addEventListener('click', playFirstSong)
             })
+
+            song.addEventListener('timeupdate', handleProgress)
+
+            progressBar.addEventListener('click', manualProgress)
+
+            playerButtons.forEach(button => {
+                button.addEventListener('click', playOrPause)
+            })
+            
         })
+
 
     </script>
 
