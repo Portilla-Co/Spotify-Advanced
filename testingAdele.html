@@ -191,9 +191,9 @@
             }
             else {
                 song.pause()
-                this.classList.remove('playing')
                 playerPlayButton.classList.add('playerPlayButton')
                 playerPauseButton.classList.add('playerPauseButton')
+                document.querySelector('.playing').classList.remove('playing')
             }
         }
 
@@ -237,7 +237,7 @@
             const totalSeconds = parseInt(song.duration % 60);
             const totalMinutes = parseInt((song.duration / 60) % 60);
 
-            currentTime.innerHTML = `${currentMinutes}:${currentSeconds}`
+            currentTime.innerHTML = `${currentMinutes < 10 ? `0${currentMinutes}` : ''}:${currentSeconds < 10 ? `0${currentSeconds}` : `${currentSeconds}`}`
             totalTime.innerHTML = `${totalMinutes}:${totalSeconds}`
             progressBarFilled.style.width = `${percent}%`
 
