@@ -17,7 +17,6 @@
                     </path>
                 </svg>
             </button>
-
             <button>
                 <svg role="img" height="24" width="24" class="Svg-sc-1bi12j5-0 jgfuCe IYDlXmBmmUKHveMzIPCF"
                     viewBox="0 0 24 24">
@@ -42,7 +41,7 @@
         </div>
         <div class="player">
             <div class="currentSongInfo">
-                <div class="albumsContainer">
+                <div class="albumsContainer" id="curPlayingSong" style="display: none;">
                     <div class="albumThumb">
                         <img src="./images/30.jpg">
                     </div>
@@ -50,7 +49,7 @@
                         <span>Stranger By Nature</span>
                         <span>Adele</span>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="playerButtons">
@@ -90,12 +89,12 @@
         const progressBar = document.querySelector('.progressBar')
         const playerPlayButton = document.querySelector('.play .playerPlayButton')
         const playerPauseButton = document.querySelector('.play .playerPauseButton')
-
+        const albums = []
 
         function createAlbumNameDiv(discography) {
 
             const F = discography.map((album, index) => {
-
+                albums.push(album);
                 return ` 
                 <div class="backgrounds">
                     ${index != 0 ? '<div class="separator"></div>' : ''}
@@ -180,13 +179,42 @@
             }).join('')
         }
 
+        function showPlayingInfo(playingSong) {
+            const currName = playingSong.querySelector('.songName span:first-child').textContent;
+            const currAlbumPic = document.querySelector('#curPlayingSong');
+
+            albums.map(album => {
+                album.songs.map(song => {
+                    if (song.name == currName) {
+                        curPlayingSong.style.display = ''
+                        currAlbumPic.innerHTML = `<div class="albumThumb">
+                                    <img src="./images/${album.name}.jpg">
+                                </div>
+                                <div class="artistInfo">
+                                    <span>${song.name}</span>
+                                    <span>Adele</span>
+                                </div>
+                            `;
+                    }
+                }
+
+                )
+
+            })
+
+        }
+
         function playOrPause() {
+
+
             if (song.paused) {
                 song.play()
                 this.classList.add('playing')
                 playerPauseButton.classList.remove('playerPauseButton')
                 playerPauseButton.classList.add('playerPlayButton')
                 playerPlayButton.classList.remove('playerPlayButton')
+                currSong = document.querySelector('.playing')
+                showPlayingInfo(this)
 
             }
             else {
@@ -200,7 +228,6 @@
         function playFirstSong() {
 
             const albumId = this.id
-            console.log(this)
             const container = document.querySelectorAll(`.firstContainer`)
             let firstSongSelector;
 
@@ -215,6 +242,8 @@
                 playerPauseButton.classList.add('playerPlayButton')
                 playerPlayButton.classList.remove('playerPlayButton')
                 firstSongSelector.classList.add('playing')
+
+
             }
             else {
                 song.pause()
@@ -222,6 +251,7 @@
                 playerPauseButton.classList.add('playerPauseButton')
                 firstSongSelector.classList.remove('playing')
             }
+
         }
 
         function handleProgress() {
@@ -234,7 +264,7 @@
             const currentSeconds = parseInt(song.currentTime % 60);
             const currentMinutes = parseInt((song.currentTime / 60) % 60);
 
-            
+
             const totalSeconds = parseInt(song.duration % 60);
             const totalMinutes = parseInt((song.duration / 60) % 60);
 
@@ -245,10 +275,11 @@
 
         }
 
-        function manualProgress(e){
+        function manualProgress(e) {
             const percent = (e.offsetX / progressBar.offsetWidth) * 100
             song.currentTime = (song.duration * percent) / 100
         }
+
 
         window.addEventListener('load', async () => {
 
@@ -278,7 +309,7 @@
             playerButtons.forEach(button => {
                 button.addEventListener('click', playOrPause)
             })
-            
+
         })
 
 
