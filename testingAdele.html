@@ -90,6 +90,7 @@
         const playerPlayButton = document.querySelector('.play .playerPlayButton')
         const playerPauseButton = document.querySelector('.play .playerPauseButton')
         const albums = []
+        const currAlbumPic = document.querySelector('#curPlayingSong');
 
         function createAlbumNameDiv(discography) {
 
@@ -181,7 +182,7 @@
 
         function showPlayingInfo(playingSong) {
             const currName = playingSong.querySelector('.songName span:first-child').textContent;
-            const currAlbumPic = document.querySelector('#curPlayingSong');
+            
 
             albums.map(album => {
                 album.songs.map(song => {
@@ -206,9 +207,9 @@
 
         function playOrPause() {
 
-
             if (song.paused) {
                 song.play()
+                
                 this.classList.add('playing')
                 playerPauseButton.classList.remove('playerPauseButton')
                 playerPauseButton.classList.add('playerPlayButton')
@@ -242,8 +243,19 @@
                 playerPauseButton.classList.add('playerPlayButton')
                 playerPlayButton.classList.remove('playerPlayButton')
                 firstSongSelector.classList.add('playing')
+                console.log()
+                curPlayingSong.style.display = ''
+                currAlbumPic.innerHTML =`
+                                <div class="albumThumb">
+                                    <img src="./images/${firstSongSelector.id}.jpg">
+                                </div>
+                                <div class="artistInfo">
+                                    <span>${firstSongSelector.querySelector('.songName span:first-child').textContent}</span>
+                                    <span>Adele</span>
+                                </div>
+                            `
 
-
+                
             }
             else {
                 song.pause()
